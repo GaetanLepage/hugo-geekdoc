@@ -41,7 +41,7 @@
     <div>
         <span class="editpage">
             <svg class="icon gdoc_code"><use xlink:href="#gdoc_code"></use></svg>
-            <a href="{{ path.Join $geekdocEditUrl ($.Scratch.Get "geekdocFilePath") }}">
+            <a href="{{ $geekdocEditUrl }}/{{ $.Scratch.Get "geekdocFilePath" }}">
                 Modifier la page
             </a>
         </span>
