@@ -1,4 +1,5 @@
 {{ $geekdocRepo := default (default false .Site.Params.GeekdocRepo) .Page.Params.GeekdocRepo }}
+{{ $geekdocEditUrl := default (default false .Site.Params.GeekdocEditUrl) .Page.Params.GeekdocEditUrl }}
 {{ $geekdocEditPath := default (default false .Site.Params.GeekdocEditPath) .Page.Params.GeekdocEditPath }}
 {{ if .File }}
     {{ $.Scratch.Set "geekdocFilePath" (default .File.Path .Page.Params.GeekdocFilePath) }}
@@ -18,8 +19,9 @@
     {{ end }}
 {{ end }}
 
+<!-- {{ $showEdit := (and ($.Scratch.Get "geekdocFilePath") $geekdocRepo $geekdocEditPath) }} -->
 {{ $showBreadcrumb := (and (default true .Page.Params.GeekdocBreadcrumb) (default true .Site.Params.GeekdocBreadcrumb)) }}
-{{ $showEdit := (and ($.Scratch.Get "geekdocFilePath") $geekdocRepo $geekdocEditPath) }}
+{{ $showEdit := (and ($.Scratch.Get "geekdocFilePath") $geekdocRepo $geekdocEditUrl) }}
 <div class="gdoc-page__header flex flex-wrap
     {{ if $showBreadcrumb }} justify-between {{ else }} justify-end {{ end }}
     {{ if not $showEdit }} hidden-mobile {{ end }}
@@ -39,7 +41,7 @@
     <div>
         <span class="editpage">
             <svg class="icon gdoc_code"><use xlink:href="#gdoc_code"></use></svg>
-            <a href="{{ $geekdocRepo }}/{{ path.Join $geekdocEditPath ($.Scratch.Get "geekdocFilePath") }}">
+            <a href="{{ path.Join $geekdocEditUrl ($.Scratch.Get "geekdocFilePath") }}">
                 Edit this page
             </a>
         </span>
